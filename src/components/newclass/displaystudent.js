@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from './Button';
 class DisplayStudent extends Component {
 
     render() { 
@@ -10,7 +11,7 @@ class DisplayStudent extends Component {
          Name: {name},
           department: {dept}, at {school}<br/>
           I hope you are happy to meet me.
-          <button onClick={delStudent}>Delete student</button>
+          <Button delStudent={delStudent}/>
         </div>
       
         </>

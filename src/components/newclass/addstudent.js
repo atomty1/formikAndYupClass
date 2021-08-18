@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
+import Input from './Input';
 class AddStudent extends Component {
-    state = { firstname:"", lastname: "", dept:"", school: "" }
-setInfo=(e)=>{
-this.setState({[e.target.name]: e.target.value});
+    state = { inputInfo: [{name: "firstname", val: "", }, {name: "lastname", val: ""}, {name: "dept", val: ""}, {name: "school", val: ""}]
+  }
+setInfo=(e, i)=>{
+  let {inputInfo} = this.state;
+  inputInfo[i].val= e.target.value;
+this.setState({inputInfo});
 }
 addStudent = ()=>{ 
-  let {firstname, lastname, dept, school} = this.state;
-  this.props.addStd({name: firstname+" "+lastname, dept, school});
-  this.setState({firstname: "", lastname: "", dept: "", school: ""});
+  let {inputInfo} = this.state;
+  let newObj = {};
+  let infoNames = inputInfo.map(val=>val.name);
+for (let i = 0; i < inputInfo.length; i++) {
+    newObj[infoNames[i]]= inputInfo[i].val; 
+}
+let {dept, school} = newObj;
+this.props.addStd({name: `${newObj.firstname} ${newObj.lastname}`, dept, school});
+inputInfo = inputInfo.map(val=>{return {...val, val: ""}});
+this.setState({inputInfo}); 
 }
 
     render() { 
       let {setInfo} = this;
-      let {firstname, lastname, dept, school} = this.state;
+      let {inputInfo} = this.state;
         return <>
            <div>
         Add student here
-        <input name="firstname" value={firstname} onChange={setInfo} placeholder="firstname"/>
-        <input name="lastname" value={lastname} onChange={setInfo} placeholder="lastname"/>
-        <input name="dept" value={dept} onChange={setInfo} placeholder="dept"/>
-        <input name="school" value={school} onChange={setInfo} placeholder="school"/>
+        {inputInfo.map((inp, i)=>(
+           <Input key={i} i={i}  info={inp} setMyInfo={setInfo} />
+        ))}
         <button onClick={this.addStudent}>add student</button>
       </div>
       </>

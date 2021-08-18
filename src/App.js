@@ -1,132 +1,85 @@
-import React, { Component } from 'react';
-import AddStudent from './components/newclass/addstudent';
-import DisplayStudent from './components/newclass/displaystudent';
-// import DisplayStudent from './components/newclass/displaystudent';
-// class Anything extends Component {
-//   state={firstname: "", lastname: "", allStudents: {js1: [], js2: [], js3: []}, myClass:"js1"};
-//   setInfo = e=>{
-//    this.setState({[e.target.name]: e.target.value})
-//   }
+import React, { useState } from 'react';
+import { Route, Switch } from 'react-router';
+import Admin from './components/newclass/inventory/Admin';
+// import { Redirect } from 'react-router-dom';
 
-// addStudent= ()=>{
+// import About from './components/newclass/About';
+// import Contact from './components/newclass/Contact';
+// import FirstContact from './components/newclass/FirstContact';
 
+
+// import Home from './components/newclass/Home';
+// import NavBar from './components/newclass/NavBar';
+// import NotFoundComponent from './components/newclass/NotFoundComponent';
+// import User from './components/newclass/User';
+// const App = ()=>{
+//   const [name, setName] = useState("Taiwo");
+
+//   return(
+//      <>
+
+//    <NavBar/>
+
+//    <button onClick={()=>setName("Kenny")}>change name</button>
+//      <Switch>
+     
+//      <Route path="/" exact  component={Home} />
+//      <Route path="/dashboard/:myName" component={User}/>
+     
+//         <Route path="/info" component={About}/>
+//         <Route path="/contact" exact component={Contact}/>
+//         <Route path="/contact/first" component={FirstContact}/>
+//         <Route component={NotFoundComponent}/>
+//      </Switch>
   
-//   let {allStudents, firstname, lastname, myClass} = this.state;
-//   allStudents[myClass].push({firstname, lastname, captain:false});
-//   // console.log(allStudents, firstname, lastname, myClass);
-
-//   this.setState({allStudents});
-// }
-// hideOrShow=ind=>{
-//   let {allStudents} = this.state;
-//   if(allStudents[ind].show){
-//     allStudents[ind].show= false;
-//   }else{
-//     allStudents[ind].show= true;
-//   }
-  
-//   this.setState({allStudents});
-// }
-// setClass=e=>{
-//   this.setState({myClass: e.target.value});
-// }
-// makeCaptain=(cls, i)=>{
-//   let {allStudents} = this.state;
-
-//   for (let index = 0; index < allStudents[cls].length; index++) {
-//       if(index==i){
-//         allStudents[cls][index].captain= true;
-//       }else{
-        
-//         allStudents[cls][index].captain= false;
-//       }
-  
-//   }
-//   this.setState({allStudents});
-
-// }
-
-
-
-
-//   render() { 
-//     let {allStudents, firstname, lastname} = this.state;
-//     // console.log(allStudents);
-// return(
-//   <>
-//   <select value={this.state.myClass} onChange={this.setClass}>
-//     <option value="js1">js1</option>
-//     <option value="js2">js2</option>
-//     <option value="js3">js3</option>
-//   </select>
-
-//     <input placeholder="firstname" value={firstname} name="firstname" onChange={this.setInfo} />
-//     <input placeholder="lastname" value={lastname} name="lastname" onChange={this.setInfo}/>
-//     {/* <input placeholder="department" value={department} name="department" onChange={this.setInfo}/> */}
-
-//     <button onClick={this.addStudent}>add student</button>
-// {allStudents['js1'].length>0? allStudents['js1'].map((student, i)=>(
-//   <div key={i}>
-//     <h3>student {i+1}</h3>
-//     {student.firstname} {student.lastname} {student.captain?<button>Captain</button>: <button onClick={()=>this.makeCaptain('js1', i)}>make captain</button>}
-//   </div>
-// )):<div>No student in JS1</div>}
-
-// {allStudents['js2'].length>0? allStudents['js2'].map((student, i)=>(
-//   <div key={i}>
-//     <h3>student {i+1}</h3>
-//     {student.firstname} {student.lastname} {student.captain?<button>Captain</button>: <button onClick={()=>this.makeCaptain('js2', i)}>make captain</button>}
-//   </div>
-// )):<div>No student in JS2</div>}
-   
-//    {allStudents['js3'].length>0? allStudents['js3'].map((student, i)=>(
-//   <div key={i}>
-//     <h3>student {i+1}</h3>
-//     {student.firstname} {student.lastname} {student.captain?<button>Captain</button>: <button onClick={()=>this.makeCaptain('js3', i)}>make captain</button>}
-//   </div>
-// )):<div>No student in JS3</div>}
-
 //   </>
-// )
-   
-//   }
+//   )
 // }
- 
-// export default Anything;
-
-class App extends Component {
-  state = { students: [{name: "Taiwo",dept: "software", school: "SQI"},
-  {name: "Kenny",dept: "hardware", school: "SQI"},
-  {name: "Idowu",dept: "CSE", school: "LAUTECH"}], name: "Kenny" };
-  deleteStudent = i=>{
-    let {students} = this.state;
-    students = students.filter((_, ind)=>ind!==i);
-    this.setState({students});
-  }
-  addStudent = student=>{
-    let {students} = this.state;
-    this.setState({students: [...students, student]})
-  }
-  render() { 
-    let {students}= this.state;
-    return <>
-
-    {students.length>0?
-         students.map((student, i)=>(
-           <DisplayStudent key={i} std={student} delStudent={()=>this.deleteStudent(i)}/>
-           ))
-           :
-           <div>No student present</div>
-         }
-           <AddStudent addStd={this.addStudent}/>
-   
-    </>
-  }
+// export default App;
+// import React from 'react';
+import Landing from './components/newclass/inventory/landing';
+import Nav from './components/newclass/inventory/Nav';
+import User from './components/newclass/inventory/User';
+// import EffectClass from './components/newclass/EffectClass';
+// import EffectFunction from './components/newclass/EffectFunction';
+const App = ()=>{
+  const [goods, setGoods] = useState([]);
+  const deleteGood = i=>{
+    let newGoods = goods.filter((_, ind)=>i!==ind);
+    setGoods(newGoods);
+ }
+ const addGood = good=>{
+  setGoods([...goods, good]);
 }
+const deductGood = goodsToDeduct =>{
+  let getAllGoods = [...goods];
+  for (let index = 0; index < getAllGoods.length; index++) {
+    for (let i = 0; i < goodsToDeduct.length; i++) {
+      if(index === goodsToDeduct[i].index && getAllGoods[index].goodQty>= goodsToDeduct[i].qty){
+        getAllGoods[index].goodQty -=goodsToDeduct[i].qty; 
+      }
+      
+    }
+    
+  }
+  setGoods(getAllGoods);
+}
+// const [dept, setDept] = useState();
 
+  return(
 
+    <>
+    <Nav/>
+    <br/>
+    <Switch>
+      <Route path="/" exact component={Landing}/>
+      <Route path="/admin" render={(props)=><Admin {...props} goods={goods} deleteGood={deleteGood} addGood={addGood}/>}/>
+      <Route path="/user" render={(props)=><User {...props} goods={goods} deductGood={deductGood}/>}/>
+    </Switch>
 
- 
+  
+      
+    </>
+  )
+}
 export default App;
-
-
